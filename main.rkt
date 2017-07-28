@@ -1,842 +1,229 @@
-#reader(lib"read.ss""wxme")WXME0108 ## 
-#|
-   This file uses the GRacket editor format.
-   Open this file in DrRacket version 6.6 or later to read it.
+#lang racket
+(require syntax/parse)
+(require syntax/parse/define)
+(require framework)
+(require racket/gui)
+(require pict)
 
-   Most likely, it was created by saving a program in DrRacket,
-   and it probably contains a program with non-text elements
-   (such as images or comment boxes).
 
-            http://racket-lang.org/
-|#
- 32 7 #"wxtext\0"
-3 1 6 #"wxtab\0"
-1 1 8 #"wximage\0"
-2 0 8 #"wxmedia\0"
-4 1 34 #"(lib \"syntax-browser.ss\" \"mrlib\")\0"
-1 0 36 #"(lib \"cache-image-snip.ss\" \"mrlib\")\0"
-1 0 68
-(
- #"((lib \"image-core.ss\" \"mrlib\") (lib \"image-core-wxme.rkt\" \"mr"
- #"lib\"))\0"
-) 1 0 16 #"drscheme:number\0"
-3 0 44 #"(lib \"number-snip.ss\" \"drscheme\" \"private\")\0"
-1 0 36 #"(lib \"comment-snip.ss\" \"framework\")\0"
-1 0 93
-(
- #"((lib \"collapsed-snipclass.ss\" \"framework\") (lib \"collapsed-sni"
- #"pclass-wxme.ss\" \"framework\"))\0"
-) 0 0 43 #"(lib \"collapsed-snipclass.ss\" \"framework\")\0"
-0 0 19 #"drscheme:sexp-snip\0"
-0 0 29 #"drscheme:bindings-snipclass%\0"
-1 0 101
-(
- #"((lib \"ellipsis-snip.rkt\" \"drracket\" \"private\") (lib \"ellipsi"
- #"s-snip-wxme.rkt\" \"drracket\" \"private\"))\0"
-) 2 0 88
-(
- #"((lib \"pict-snip.rkt\" \"drracket\" \"private\") (lib \"pict-snip.r"
- #"kt\" \"drracket\" \"private\"))\0"
-) 0 0 34 #"(lib \"bullet-snip.rkt\" \"browser\")\0"
-0 0 25 #"(lib \"matrix.ss\" \"htdp\")\0"
-1 0 22 #"drscheme:lambda-snip%\0"
-1 0 29 #"drclickable-string-snipclass\0"
-0 0 26 #"drracket:spacer-snipclass\0"
-0 0 57
-#"(lib \"hrule-snip.rkt\" \"macro-debugger\" \"syntax-browser\")\0"
-1 0 26 #"drscheme:pict-value-snip%\0"
-0 0 45 #"(lib \"image-snipr.ss\" \"slideshow\" \"private\")\0"
-1 0 38 #"(lib \"pict-snipclass.ss\" \"slideshow\")\0"
-2 0 55 #"(lib \"vertical-separator-snip.ss\" \"stepper\" \"private\")\0"
-1 0 18 #"drscheme:xml-snip\0"
-1 0 31 #"(lib \"xml-snipclass.ss\" \"xml\")\0"
-1 0 21 #"drscheme:scheme-snip\0"
-2 0 34 #"(lib \"scheme-snipclass.ss\" \"xml\")\0"
-1 0 10 #"text-box%\0"
-1 0 32 #"(lib \"text-snipclass.ss\" \"xml\")\0"
-1 0 1 6 #"wxloc\0"
-          0 0 57 0 1 #"\0"
-0 75 1 #"\0"
-0 10 90 -1 90 -1 3 -1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 255 255 255 1 -1 0 9
-#"Standard\0"
-0 75 12 #"Courier New\0"
-0 10 90 -1 90 -1 3 -1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 255 255 255 1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 -1 -1 2 24
-#"framework:default-color\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 255 255 255 -1 -1 2
-1 #"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1 1 1 150 0 150 0 0 0 -1 -1 2 15
-#"text:ports out\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 150 0 150 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1.0 0 -1 -1 93 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 255 0 0 0 0 0 -1
--1 2 15 #"text:ports err\0"
-0 -1 1 #"\0"
-1 0 -1 -1 93 -1 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 255 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1 1 1 0 0 175 0 0 0 -1 -1 2 17
-#"text:ports value\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 175 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1.0 0 92 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 34 139 34 0 0 0 -1
--1 2 27 #"Matching Parenthesis Style\0"
-0 -1 1 #"\0"
-1.0 0 92 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 34 139 34 0 0 0 -1
--1 2 1 #"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 38 38 128 0 0 0 -1 -1 2 37
-#"framework:syntax-color:scheme:symbol\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 38 38 128 0 0 0 -1 -1 2 38
-#"framework:syntax-color:scheme:keyword\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 38 38 128 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 194 116 31 0 0 0 -1 -1 2
-38 #"framework:syntax-color:scheme:comment\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 194 116 31 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 41 128 38 0 0 0 -1 -1 2 37
-#"framework:syntax-color:scheme:string\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 41 128 38 0 0 0 -1 -1 2 35
-#"framework:syntax-color:scheme:text\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 41 128 38 0 0 0 -1 -1 2 39
-#"framework:syntax-color:scheme:constant\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 41 128 38 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 132 60 36 0 0 0 -1 -1 2 49
-#"framework:syntax-color:scheme:hash-colon-keyword\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 132 60 36 0 0 0 -1 -1 2 42
-#"framework:syntax-color:scheme:parenthesis\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 132 60 36 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 255 0 0 0 0 0 -1 -1 2 36
-#"framework:syntax-color:scheme:error\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 255 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 36
-#"framework:syntax-color:scheme:other\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 16
-#"Misspelled Text\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 81 112 203 0 0 0 -1 -1 2
-38 #"drracket:check-syntax:lexically-bound\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 81 112 203 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 178 34 34 0 0 0 -1 -1 2 28
-#"drracket:check-syntax:set!d\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 178 34 34 0 0 0 -1 -1 2 37
-#"drracket:check-syntax:unused-require\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 255 0 0 0 0 0 -1 -1 2 36
-#"drracket:check-syntax:free-variable\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 255 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 68 0 203 0 0 0 -1 -1 2 31
-#"drracket:check-syntax:imported\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 68 0 203 0 0 0 -1 -1 2 47
-#"drracket:check-syntax:my-obligation-style-pref\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 178 34 34 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 116 0 0 0 0 -1 -1 2 50
-#"drracket:check-syntax:their-obligation-style-pref\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 116 0 0 0 0 -1 -1 2 48
-#"drracket:check-syntax:unk-obligation-style-pref\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 139 142 28 0 0 0 -1 -1 2
-49 #"drracket:check-syntax:both-obligation-style-pref\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 139 142 28 0 0 0 -1 -1 2
-26 #"plt:htdp:test-coverage-on\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 1
-#"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 1 0 0 0 0 0 0 255 165 0 0 0 0 -1 -1 2 27
-#"plt:htdp:test-coverage-off\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 1 0 0 0 0 0 0 255 165 0 0 0 0 -1 -1 4 1
-#"\0"
-0 70 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
--1 -1 4 4 #"XML\0"
-0 70 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
--1 -1 2 37 #"plt:module-language:test-coverage-on\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 -1 -1 2 38
-#"plt:module-language:test-coverage-off\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 1 0 0 0 0 0 0 255 165 0 0 0 0 -1 -1 4 1
-#"\0"
-0 71 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
--1 -1 4 1 #"\0"
-0 -1 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 1 0 0 0 0 0 0 0 0 1.0 1.0 1.0 0 0 255 0 0 0 -1
--1 4 1 #"\0"
-0 71 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 1 0 0 0 0 0 0 0 0 1.0 1.0 1.0 0 0 255 0 0 0 -1
--1 4 1 #"\0"
-0 71 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 0 100 0 0 0 0 -1
--1 2 1 #"\0"
-0 -1 1 #"\0"
-1 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1 1 1 200 0 0 0 0 0 -1 -1 4 1
-#"\0"
-0 -1 1 #"\0"
-1.0 0 92 -1 -1 -1 -1 -1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 255 255 0 -1 -1
-          0 616 0 28 3 12 #"#lang racket"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 7 #"require"
-0 0 24 3 1 #" "
-0 0 14 3 12 #"syntax/parse"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 7 #"require"
-0 0 24 3 1 #" "
-0 0 14 3 19 #"syntax/parse/define"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 7 #"require"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"framework"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 7 #"require"
-0 0 24 3 1 #" "
-0 0 14 3 10 #"racket/gui"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 7 #"require"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"pict"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 17 3 26 #";A breakout game for SDD11"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 14 3 15 #"collect-garbage"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"'"
-0 0 14 3 11 #"incremental"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 17 3 45 #";(define (make-get-set list) (push list '()))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"main-pipe"
-0 0 24 3 2 #" ("
-0 0 14 3 14 #"current-thread"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"struct"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 3 #" (["
-0 0 14 3 6 #"radius"
-0 0 24 3 3 #"] ["
-0 0 14 3 5 #"speed"
-0 0 24 3 1 #" "
-0 0 23 3 9 #"#:mutable"
-0 0 24 3 3 #"] ["
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 23 3 9 #"#:mutable"
-0 0 24 3 1 #" "
-0 0 23 3 6 #"#:auto"
-0 0 24 3 3 #"] ["
-0 0 14 3 1 #"y"
-0 0 24 3 1 #" "
-0 0 23 3 9 #"#:mutable"
-0 0 24 3 1 #" "
-0 0 23 3 6 #"#:auto"
-0 0 24 3 2 #"])"
-0 0 24 29 1 #"\n"
-0 0 24 3 2 #"  "
-0 0 23 3 12 #"#:auto-value"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"0"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 13 #"define-syntax"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"ball-draw"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 15 3 12 #"syntax-rules"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"    (("
-0 0 14 3 1 #"_"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"y"
-0 0 24 3 1 #" "
-0 0 14 3 2 #"dc"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"     ("
-0 0 15 3 4 #"when"
-0 0 24 3 2 #" ("
-0 0 14 3 5 #"ball?"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 8 #"       ("
-0 0 15 3 4 #"let*"
-0 0 24 3 3 #" (("
-0 0 14 3 6 #"radius"
-0 0 24 3 2 #" ("
-0 0 14 3 11 #"ball-radius"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 4 #")) ("
-0 0 14 3 6 #"offset"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"/"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"radius"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"2"
-0 0 24 3 3 #")))"
-0 0 24 29 1 #"\n"
-0 0 24 3 10 #"         ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 2 #"dc"
-0 0 24 3 1 #" "
-0 0 14 3 12 #"draw-ellipse"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"-"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"offset"
-0 0 24 3 3 #") ("
-0 0 14 3 1 #"-"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"y"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"offset"
-0 0 24 3 2 #") "
-0 0 14 3 6 #"radius"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"radius"
-0 0 24 3 4 #"))))"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"    (("
-0 0 14 3 1 #"_"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #" "
-0 0 14 3 2 #"dc"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"     ("
-0 0 15 3 4 #"when"
-0 0 24 3 2 #" ("
-0 0 14 3 5 #"ball?"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 8 #"       ("
-0 0 15 3 4 #"let*"
-0 0 24 3 3 #" (("
-0 0 14 3 6 #"radius"
-0 0 24 3 2 #" ("
-0 0 14 3 11 #"ball-radius"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 4 #")) ("
-0 0 14 3 6 #"offset"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"/"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"radius"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"2"
-0 0 24 3 4 #")) ("
-0 0 14 3 1 #"x"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"ball-x"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 4 #")) ("
-0 0 14 3 1 #"y"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"ball-y"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 3 #")))"
-0 0 24 29 1 #"\n"
-0 0 24 3 10 #"         ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 2 #"dc"
-0 0 24 3 1 #" "
-0 0 14 3 12 #"draw-ellipse"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"-"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"offset"
-0 0 24 3 3 #") ("
-0 0 14 3 1 #"-"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"y"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"offset"
-0 0 24 3 2 #") "
-0 0 14 3 6 #"radius"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"radius"
-0 0 24 3 6 #"))))))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 13 #"define-syntax"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"ball-move"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 15 3 12 #"syntax-rules"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"    (("
-0 0 14 3 1 #"_"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"     ("
-0 0 15 3 4 #"when"
-0 0 24 3 2 #" ("
-0 0 14 3 5 #"ball?"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 8 #"       ("
-0 0 15 3 3 #"let"
-0 0 24 3 3 #" (("
-0 0 14 3 5 #"speed"
-0 0 24 3 2 #" ("
-0 0 14 3 10 #"ball-speed"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 3 #")))"
-0 0 24 29 1 #"\n"
-0 0 24 3 10 #"         ("
-0 0 14 3 11 #"set-ball-x!"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"+"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"ball-x"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 3 #") ("
-0 0 14 3 9 #"real-part"
-0 0 24 3 1 #" "
-0 0 14 3 5 #"speed"
-0 0 24 3 3 #")))"
-0 0 24 29 1 #"\n"
-0 0 24 3 10 #"         ("
-0 0 14 3 11 #"set-ball-y!"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"+"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"ball-y"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"ball"
-0 0 24 3 3 #") ("
-0 0 14 3 9 #"imag-part"
-0 0 24 3 1 #" "
-0 0 14 3 5 #"speed"
-0 0 24 3 8 #"))))))))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 3 #"bob"
-0 0 24 3 2 #" ("
-0 0 14 3 4 #"ball"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"40"
-0 0 24 3 1 #" "
-0 0 21 3 4 #"4+2i"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 11 #"start-frame"
-0 0 24 3 2 #" ("
-0 0 14 3 3 #"new"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"frame%"
-0 0 24 3 2 #" ["
-0 0 14 3 5 #"label"
-0 0 24 3 1 #" "
-0 0 19 3 4 #"\"hi\""
-0 0 24 3 3 #"] ["
-0 0 14 3 10 #"min-height"
-0 0 24 3 1 #" "
-0 0 21 3 3 #"240"
-0 0 24 3 3 #"] ["
-0 0 14 3 9 #"min-width"
-0 0 24 3 1 #" "
-0 0 21 3 3 #"320"
-0 0 24 3 3 #"]))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"drawboard"
-0 0 24 3 2 #" ("
-0 0 14 3 3 #"new"
-0 0 24 3 1 #" "
-0 0 14 3 7 #"canvas%"
-0 0 24 3 2 #" ["
-0 0 14 3 6 #"parent"
-0 0 24 3 1 #" "
-0 0 14 3 11 #"start-frame"
-0 0 24 3 3 #"] ["
-0 0 14 3 5 #"label"
-0 0 24 3 1 #" "
-0 0 19 3 6 #"\"1234\""
-0 0 24 3 3 #"] ["
-0 0 14 3 7 #"enabled"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"#t"
-0 0 24 3 3 #"]))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 2 #" ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"drawboard"
-0 0 24 3 1 #" "
-0 0 14 3 6 #"get-dc"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"quit-but"
-0 0 24 3 2 #" ("
-0 0 14 3 3 #"new"
-0 0 24 3 1 #" "
-0 0 14 3 7 #"button%"
-0 0 24 3 2 #" ["
-0 0 14 3 5 #"label"
-0 0 24 3 1 #" "
-0 0 19 3 6 #"\"quit\""
-0 0 24 3 3 #"] ["
-0 0 14 3 6 #"parent"
-0 0 24 3 1 #" "
-0 0 14 3 11 #"start-frame"
-0 0 24 3 3 #"] ["
-0 0 14 3 8 #"callback"
-0 0 24 3 2 #" ("
-0 0 15 3 2 #"\316\273"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"button"
-0 0 24 3 1 #" "
-0 0 14 3 3 #"evt"
-0 0 24 3 3 #") ("
-0 0 14 3 9 #"exit:exit"
-0 0 24 3 5 #"))]))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 11 #"start-frame"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"show"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"#t"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 13 #"define-syntax"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"framerate"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 15 3 12 #"syntax-rules"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"    (("
-0 0 14 3 1 #"_"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"name"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"     ("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"name"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"thread"
-0 0 24 29 1 #"\n"
-0 0 24 3 20 #"                   ("
-0 0 15 3 2 #"\316\273"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #" "
-0 0 24 3 1 #" "
-0 0 24 3 20 #"                   ("
-0 0 15 3 3 #"let"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"loop"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 24 #"                       ("
-0 0 14 3 9 #"displayln"
-0 0 24 3 1 #" "
-0 0 19 3 12 #"\"working...\""
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 24 #"                       ("
-0 0 14 3 5 #"sleep"
-0 0 24 3 1 #" "
-0 0 21 3 3 #"0.5"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 24 #"                       ("
-0 0 14 3 4 #"loop"
-0 0 24 3 6 #"))))))"
-0 0 24 29 1 #"\n"
-0 0 24 3 6 #"    (("
-0 0 14 3 1 #"_"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"name"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"rate"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 8 #"       ("
-0 0 15 3 6 #"define"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"name"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"thread"
-0 0 24 29 1 #"\n"
-0 0 24 3 22 #"                     ("
-0 0 15 3 2 #"\316\273"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 24 #"                       ("
-0 0 15 3 3 #"let"
-0 0 24 3 3 #" (("
-0 0 14 3 3 #"num"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"0"
-0 0 24 3 27 #"))                         "
-0 0 24 29 1 #"\n"
-0 0 24 3 26 #"                         ("
-0 0 15 3 3 #"let"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"loop"
-0 0 24 3 3 #" ()"
-0 0 24 29 1 #"\n"
-0 0 24 3 28 #"                           ("
-0 0 14 3 5 #"sleep"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"/"
-0 0 24 3 1 #" "
-0 0 14 3 4 #"rate"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 3 28 #"                           ("
-0 0 14 3 4 #"loop"
-0 0 24 3 9 #")))))))))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 19 #"set-text-foreground"
-0 0 24 3 1 #" "
-0 0 19 3 6 #"\"black"
-0 0 19 3 1 #"\""
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 1 #"("
-0 0 15 3 6 #"define"
-0 0 24 3 2 #" ("
-0 0 14 3 10 #"drawscreen"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 12 #"resume-flush"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 15 3 3 #"for"
-0 0 24 3 3 #" (("
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 21 3 3 #"100"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 13 #"suspend-flush"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 14 #"draw-rectangle"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"10"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"10"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 9 #"draw-text"
-0 0 24 3 2 #" ("
-0 0 14 3 6 #"format"
-0 0 24 3 1 #" "
-0 0 19 3 1 #"\""
-0 0 19 3 2 #"~a"
-0 0 19 3 2 #" \""
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 3 #") ("
-0 0 14 3 1 #"*"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"10"
-0 0 24 3 1 #" "
-0 0 14 3 1 #"x"
-0 0 24 3 2 #") "
-0 0 14 3 1 #"x"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 12 #"resume-flush"
-0 0 24 3 1 #")"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    ("
-0 0 14 3 5 #"sleep"
-0 0 24 3 2 #" ("
-0 0 14 3 1 #"/"
-0 0 24 3 1 #" "
-0 0 21 3 1 #"1"
-0 0 24 3 1 #" "
-0 0 21 3 2 #"60"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 3 5 #"    )"
-0 0 24 29 1 #"\n"
-0 0 24 3 3 #"  ("
-0 0 14 3 4 #"send"
-0 0 24 3 1 #" "
-0 0 14 3 8 #"drawb-dc"
-0 0 24 3 1 #" "
-0 0 14 3 13 #"suspend-flush"
-0 0 24 3 2 #"))"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0 0 24 29 1 #"\n"
-0           0
+
+;A breakout game for SDD11
+
+(collect-garbage 'incremental)
+
+
+
+;(define (make-get-set list) (push list '()))
+
+(define main-pipe (current-thread))
+
+(define game-size 5)
+
+(struct ball ([radius] [speed #:mutable] [xy #:mutable #:auto])
+  #:auto-value 0+0i)
+
+(struct paddle (width position) #:mutable)
+
+(define-syntax between
+  (syntax-rules ()
+    ((_ num x y)
+     (< x num y))
+    ((_ num x)
+     (< 0 num x))))
+
+(define-syntax paddle-draw
+  (syntax-rules ()
+    ((_ paddle dc)
+     (when (paddle? paddle)
+       (let ((y (- (cadr game-size) 20)))
+       (send dc draw-rectangle (paddle-position paddle) y (paddle-width paddle) 10))))))
+
+(define-syntax paddle-move
+  (syntax-rules ()
+    ((_ paddle num)
+     (when (paddle? paddle)
+       (set-paddle-position! paddle (+ (paddle-position paddle) num))))))
+
+(define-syntax ball-draw
+  (syntax-rules ()
+    ((_ ball x y dc)
+     (when (ball? ball)
+       (let* ((radius (* 2 (ball-radius ball))))
+         (send dc draw-ellipse x y radius radius))))
+    ((_ ball dc)
+     (when (ball? ball)
+       (let* ((radius (* 2 (ball-radius ball))) (x (real-part (ball-xy ball))) (y (imag-part (ball-xy ball))))
+         (send dc draw-ellipse x y radius radius))))))
+
+(define-syntax ball-move
+  (syntax-rules ()
+    ((_ ball)
+     (when (ball? ball)
+       (let ((speed (ball-speed ball)))
+         (set-ball-xy! ball (+ (ball-xy ball) speed)))))))
+
+
+(define-syntax incf
+  (syntax-rules ()
+    ((_ num)
+     (set! num (+ num 1)))
+    ((_ num n ...)
+     (set! num (+ num n ...)))))
+
+(define-syntax decf
+  (syntax-rules ()
+    ((_ num)
+     (set! num (- num 1)))
+    ((_ num n ...)
+     (set! num (- num n ...)))))
+
+(define-syntax pop
+  (syntax-rules ()
+    ((_ lst)
+     (begin
+       (let ((ret (car lst)))
+       (set! lst (cdr lst))
+         ret)
+       ))))
+
+(define bob (ball 20 4+2i))
+
+(define phil (paddle 60 10))
+
+
+(define start-frame (new frame% [label "hi"] [min-height 240] [min-width 320]))
+
+
+(define game-canvas%
+  (class canvas%
+    (inherit get-width get-height refresh)
+
+    ;; direction : one of #f, 'left, 'right, 'up, 'down
+    (field [direction #f])
+    
+    (define/override (on-char ke)
+      (case (send ke get-key-code)
+        [(left)
+         (set! direction (send ke get-key-code))
+         (set-paddle-position! phil (+ (paddle-position phil) -5))
+         (refresh)]
+        [(right)
+         (set! direction (send ke get-key-code))
+         (set-paddle-position! phil (+ (paddle-position phil) 5))
+         (refresh)]
+        [else (void)]))
+
+    
+
+    (super-new)))
+
+(define res (cons
+             (new combo-field%
+                  [label "Resoulution"] [choices (list "240 x 320" "320 x 480" "360 x 640" "720 x 1280" "768 x 1366" "1080 x 1920")]
+                  [parent start-frame] [init-value "320 x 480"])
+             (delay (new button% [parent start-frame] [label "Start"]
+                         [callback
+                          (λ (button evt)
+                            (let* ((str (parse-n-nums (send (car res) get-value)))
+                                  (num (if (<= 2 (length str))
+                                              (list (car str) (cadr str))
+                                              (cons 320 (cons 480 null))))
+                                  (game game-frame))
+                              (send start-frame show #f)
+                              (send game show #t)
+                              (send game resize (cadr num) (car num))
+                              (send game min-height (car num))
+                              (send game min-width (cadr num))
+                              (send game stretchable-height #f)
+                              (send game stretchable-width #f)
+                              (set! game-size (list (cadr num) (car num)))
+                              (define ticker (new timer% [interval 20]
+                                                  [notify-callback (λ ()
+                                                                     (check-bounds)
+                                                                     (send game-dc clear)
+                                                                     (ball-draw bob game-dc)
+                                                                     (ball-move bob)
+                                                                     (paddle-draw phil game-dc))]))
+                              7
+                              
+                              ;(thread-resume game-thread)
+                              ;(send (car res) set-label (string-append (number->string (car num)) (number->string (cadr num))))
+                              ))
+                              ]
+                         ))))
+
+(force (cdr res))
+
+(define (check-bounds)
+  (let ((wid (- (car game-size) (* 2 (ball-radius bob)))) (hei (- (cadr game-size) (* 2 (ball-radius bob))))
+                               (x (real-part (ball-xy bob)))
+                               (y (imag-part (ball-xy bob))))
+    (if (and (between x wid) (between y hei))
+        null
+        (begin
+          (when (not (< 0 x wid)) (set-ball-speed! bob (make-rectangular (- (real-part (ball-speed bob))) (imag-part (ball-speed bob)))))
+          (when (not (< 0 y  hei)) (set-ball-speed! bob (make-rectangular (real-part (ball-speed bob)) (- (imag-part (ball-speed bob))))))
+          (when (>= 0 x) (set-ball-xy! bob (make-rectangular 0 y)))
+          (when (<= wid x) (set-ball-xy! bob (make-rectangular wid y)))
+          (when (>= 0 y) (set-ball-xy! bob (make-rectangular x 0)))
+          (when (<= hei y) (set-ball-xy! bob (make-rectangular x hei)))
+      )
+      )))
+
+;(define drawboard (new canvas% [parent start-frame] [label "1234"] [enabled #t]))
+
+;(define drawb-dc (send drawboard get-dc))
+
+(define quit-but (new button% [label "quit"] [parent start-frame] [callback (λ (button evt) (exit:exit))]))
+
+(send start-frame show #t)
+
+(define (parse-n-nums str (acc null) (tem null))
+  (cond
+    ((null? str) (if (null? acc)
+                     (list (string->number (list->string tem)))
+                     (append (reverse acc) (cons (string->number (list->string tem)) null))))
+    ((list? str)
+     (if  (eq? (char-general-category (car str)) 'nd)
+          (if (null? tem)
+              (parse-n-nums (cdr str) acc (list (car str)))
+              (parse-n-nums (cdr str) acc (append tem (cons (car str) null))))
+          (let ((test (string->number (list->string tem))))
+            (if (number? test)
+                (parse-n-nums (cdr str) (cons (string->number (list->string tem)) acc))
+                (parse-n-nums (cdr str) acc)))))
+    ((number? str) str)
+    ((string? str) (parse-n-nums (string->list str)))
+    ((symbol? str) (parse-n-nums (symbol->string str)))
+    ((#t) null)))
+
+(define game-frame (new frame% [label "BREAKOUT"]))
+(define game-draw (new game-canvas% [parent game-frame]))
+(define game-dc (send game-draw get-dc))
+
+(define bill (list 1 2 3 4))
+
+#|(define worker (thread (lambda ()
+                         (let loop ()
+                           (displayln "Working...")
+                           (sleep 0.2)
+                           (loop)))))|#
+
+#|(define game-thread (thread (λ ()
+                               (let loop ()
+                                 (ball-draw bob game-dc)
+
+;                                 (when (let ((x (real-part (ball-xy bob))))
+;                                         (or (= 0 x) (=
+                                 
+                                 (ball-move bob)
+                                 (sleep (/ 1 30))
+                                 (loop)))))
+(thread-suspend game-thread)
+
+(define joe (delay (let-values ([(x y) (send game-dc get-size)])
+              (list x y))))|#
+                               
+                              
+;(parse-n-nums "1234cds546hello martin 56 78 9")
+;(parse-n-nums  "420")
